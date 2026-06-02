@@ -1,0 +1,29 @@
+import hashlib
+
+database = {}
+
+def hash_password(password):
+    return hashlib.sha256(password.encode()).hexdigest()
+
+def register():
+    print("\n--- User Registration ---")
+    username = input("Create Username: ")
+    password = input("Create Password: ")
+    
+    database[username] = hash_password(password)
+    print("User registered successfully!")
+
+def login():
+    print("\n--- User Login ---")
+    username = input("Username: ")
+    password = input("Password: ")
+
+    hashed_input = hash_password(password)
+    
+    if username in database and database[username] == hashed_input:
+        print("Login Successful! Session started.")
+    else:
+        print("Login Failed! Invalid credentials.")
+
+register()
+login()
